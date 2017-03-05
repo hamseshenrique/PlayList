@@ -1,8 +1,6 @@
-package com.software.hms.playlist.util;
+package com.software.hms.playlist.server;
 
 import com.software.hms.playlist.interfaces.GoogleApi;
-
-import retrofit2.Retrofit;
 
 /**
  * Created by hms on 05/03/17.

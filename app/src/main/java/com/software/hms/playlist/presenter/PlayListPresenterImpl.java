@@ -1,13 +1,13 @@
 package com.software.hms.playlist.presenter;
 
-import com.software.hms.playlist.dto.PlayListsDto;
+import com.software.hms.playlist.dto.PlayListDto;
+import com.software.hms.playlist.enums.GoogleApiEnum;
 import com.software.hms.playlist.interfaces.GoogleApi;
 import com.software.hms.playlist.interfaces.PlayListAction;
 import com.software.hms.playlist.interfaces.PlayListPresenter;
-import com.software.hms.playlist.util.PlayListService;
-import com.software.hms.playlist.util.PlayListServiceImpl;
+import com.software.hms.playlist.server.PlayListService;
+import com.software.hms.playlist.server.PlayListServiceImpl;
 
-import retrofit2.Retrofit;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.exceptions.OnErrorFailedException;
@@ -31,21 +31,21 @@ public class PlayListPresenterImpl implements PlayListPresenter{
     @Override
     public void findPlayList() {
         final GoogleApi googleApi = playListService.create();
-        final Observable<PlayListsDto> observable = googleApi.playlist("","","");
+        final Observable<PlayListDto> observable = googleApi.playlist(GoogleApiEnum.PART.getValue(),
+                GoogleApiEnum.CHANELID.getValue(),GoogleApiEnum.KEY.getValue());
         observable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .onErrorResumeNext(throwable -> {
                     return Observable.empty();
                 })
                 .subscribe(playListsDto -> {
-                    playListAction.atualizar(playListsDto.getListPlayList());
+                    playListAction.atualizar(playListsDto.getItems());
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
                         throw new OnErrorFailedException(throwable);
                     }
                 });
-
     }
 
 

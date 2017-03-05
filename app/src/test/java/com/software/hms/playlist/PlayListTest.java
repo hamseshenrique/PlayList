@@ -1,9 +1,11 @@
 package com.software.hms.playlist;
 
-import com.software.hms.playlist.dto.PlayListsDto;
+import com.software.hms.playlist.dto.Item;
+import com.software.hms.playlist.dto.PlayListDto;
+import com.software.hms.playlist.enums.GoogleApiEnum;
 import com.software.hms.playlist.interfaces.GoogleApi;
 import com.software.hms.playlist.presenter.PlayListPresenterImpl;
-import com.software.hms.playlist.util.PlayListService;
+import com.software.hms.playlist.server.PlayListService;
 
 import org.junit.After;
 import org.junit.Before;
@@ -11,6 +13,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import java.util.ArrayList;
 
 import rx.Observable;
 import rx.Scheduler;
@@ -20,11 +24,9 @@ import rx.functions.Func1;
 import rx.plugins.RxJavaHooks;
 import rx.schedulers.Schedulers;
 
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 /**
@@ -42,7 +44,6 @@ public class PlayListTest {
     @Mock
     private GoogleApi googleApi;
     private PlayListPresenterImpl playListPresenter;
-    private static final String SERVER = "http://www.googleapis.com";
 
     @Before
     public void setUp() throws Exception {
@@ -88,11 +89,16 @@ public class PlayListTest {
 
     @Test
     public void findPlayList() throws Exception {
+        final PlayListDto playListDto = new PlayListDto();
+        playListDto.setItems(new ArrayList<Item>());
+
         when(playListService.create()).thenReturn(googleApi);
-        when(googleApi.playlist("","","")).thenReturn(Observable.just(new PlayListsDto()));
+        when(googleApi.playlist(GoogleApiEnum.PART.getValue(),
+                GoogleApiEnum.CHANELID.getValue(),GoogleApiEnum.KEY.getValue()))
+                .thenReturn(Observable.just(playListDto));
         playListPresenter.findPlayList();
 
-        verify(playListActivity,times(1)).atualizar(anyString());
+        verify(playListActivity,times(1)).atualizar(playListDto.getItems());
 
     }
 }

@@ -6,16 +6,25 @@ package com.software.hms.playlist.dto;
 
 public class ThumbnailsDto {
 
-    private MediumDto mediumDto;
+    private MediumDto medium;
+    private HighDto high;
 
     public ThumbnailsDto(){}
 
 
-    public MediumDto getMediumDto() {
-        return mediumDto;
+    public MediumDto getMedium() {
+        return medium;
     }
 
-    public void setMediumDto(MediumDto mediumDto) {
-        this.mediumDto = mediumDto;
+    public void setMedium(MediumDto medium) {
+        this.medium = medium;
+    }
+
+    public HighDto getHigh() {
+        return high;
+    }
+
+    public void setHigh(HighDto high) {
+        this.high = high;
     }
 }

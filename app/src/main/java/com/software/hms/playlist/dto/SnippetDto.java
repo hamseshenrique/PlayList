@@ -8,10 +8,11 @@ public class SnippetDto {
     private String channelId;
     private String title;
     private String description;
-    private ThumbnailsDto thumbnailsDto;
+    private ThumbnailsDto thumbnails;
+    private String channelTitle;
+    private LocalizedDto localizedDto;
 
     public SnippetDto(){}
-
 
     public String getChannelId() {
         return channelId;
@@ -37,11 +38,28 @@ public class SnippetDto {
         this.description = description;
     }
 
-    public ThumbnailsDto getThumbnailsDto() {
-        return thumbnailsDto;
+    public ThumbnailsDto getThumbnails() {
+        return thumbnails;
     }
 
-    public void setThumbnailsDto(ThumbnailsDto thumbnailsDto) {
-        this.thumbnailsDto = thumbnailsDto;
+    public void setThumbnails(ThumbnailsDto thumbnails) {
+        this.thumbnails = thumbnails;
+    }
+
+
+    public String getChannelTitle() {
+        return channelTitle;
+    }
+
+    public void setChannelTitle(String channelTitle) {
+        this.channelTitle = channelTitle;
+    }
+
+    public LocalizedDto getLocalizedDto() {
+        return localizedDto;
+    }
+
+    public void setLocalizedDto(LocalizedDto localizedDto) {
+        this.localizedDto = localizedDto;
     }
 }

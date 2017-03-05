@@ -3,12 +3,12 @@ package com.software.hms.playlist.dto;
 /**
  * Created by hms on 04/03/17.
  */
-public class Localized {
+public class LocalizedDto {
 
     private String title;
     private String description;
 
-    public Localized(){}
+    public LocalizedDto(){}
 
     public String getTitle() {
         return title;

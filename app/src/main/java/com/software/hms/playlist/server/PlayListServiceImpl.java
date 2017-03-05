@@ -1,5 +1,6 @@
-package com.software.hms.playlist.util;
+package com.software.hms.playlist.server;
 
+import com.software.hms.playlist.enums.GoogleApiEnum;
 import com.software.hms.playlist.interfaces.GoogleApi;
 
 import java.util.concurrent.TimeUnit;
@@ -15,15 +16,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PlayListServiceImpl implements PlayListService {
 
-    private static final String SERVER = "http://www.googleapis.com";
-
     @Override
     public GoogleApi create() {
         final OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .readTimeout(3000, TimeUnit.MILLISECONDS).build();
 
         final Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl(SERVER)
+                .baseUrl(GoogleApiEnum.SERVER.getValue())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient);
