@@ -48,7 +48,7 @@ public class PlayListItemAdapter extends RecyclerView.Adapter<PlayListItemHolder
                 Picasso.with(context).load(thumbnailsDto.getMedium().getUrl())
                         .into(holder.getImageView());
             }
-            //holder.onClickItem(item);
+            holder.onClickItem(item);
         }
     }
 

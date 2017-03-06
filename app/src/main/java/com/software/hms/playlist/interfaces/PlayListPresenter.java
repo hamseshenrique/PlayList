@@ -15,4 +15,10 @@ public interface PlayListPresenter {
      * @param playListId
      */
     void findByIdPlayList(final String playListId);
+
+    /**
+     *
+     * @param id
+     */
+    void infoPlayList(String id);
 }

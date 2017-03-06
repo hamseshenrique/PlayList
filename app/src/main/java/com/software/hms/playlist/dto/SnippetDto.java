@@ -12,7 +12,8 @@ public class SnippetDto implements Serializable{
     private String description;
     private ThumbnailsDto thumbnails;
     private String channelTitle;
-    private LocalizedDto localizedDto;
+    private LocalizedDto localized;
+    private ResourceId resourceId;
 
     public SnippetDto(){}
 
@@ -57,11 +58,19 @@ public class SnippetDto implements Serializable{
         this.channelTitle = channelTitle;
     }
 
-    public LocalizedDto getLocalizedDto() {
-        return localizedDto;
+    public LocalizedDto getLocalized() {
+        return localized;
     }
 
-    public void setLocalizedDto(LocalizedDto localizedDto) {
-        this.localizedDto = localizedDto;
+    public void setLocalized(LocalizedDto localized) {
+        this.localized = localized;
+    }
+
+    public ResourceId getResourceId() {
+        return resourceId;
+    }
+
+    public void setResourceId(ResourceId resourceId) {
+        this.resourceId = resourceId;
     }
 }

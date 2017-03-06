@@ -18,4 +18,8 @@ public interface GoogleApi {
     @GET("/youtube/v3/playlistItems")
     Observable<PlayListDto> playlistItems(@Query("part") String part, @Query("playlistId") String chanelId,
                                           @Query("key") String key);
+    @GET("/youtube/v3/videos")
+    Observable<PlayListDto> videos(@Query("id") String chanelId,
+                                   @Query("part") String part,
+                                   @Query("key") String key);
 }

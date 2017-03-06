@@ -68,6 +68,28 @@ public class PlayListPresenterImpl implements PlayListPresenter{
                 });
     }
 
+    @Override
+    public void infoPlayList(String id) {
+        final GoogleApi googleApi = playListService.create();
+        final Observable<PlayListDto> observable = googleApi.videos(
+                id,
+                GoogleApiEnum.PART.getValue(),
+                GoogleApiEnum.KEY.getValue());
+        observable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(throwable -> {
+                    return Observable.empty();
+                })
+                .subscribe(playListsDto -> {
+                    playListAction.atualizar(playListsDto.getItems());
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        throw new OnErrorFailedException(throwable);
+                    }
+                });
+    }
+
 
     public void setPlayListService(PlayListService playListService) {
         this.playListService = playListService;

@@ -115,6 +115,16 @@ public class PlayListTest {
 
     }
 
+    @Test
+    public void playListInfo() throws Exception {
+        final PlayListDto playListDto = new PlayListDto();
+        playListDto.setItems(new ArrayList<Item>());
 
-
+        when(playListService.create()).thenReturn(googleApi);
+        when(googleApi.videos("id",GoogleApiEnum.PART.getValue()
+                ,GoogleApiEnum.KEY.getValue()))
+                .thenReturn(Observable.just(playListDto));
+        playListPresenter.infoPlayList("id");
+        verify(playListActivity,times(1)).atualizar(playListDto.getItems());
+    }
 }
