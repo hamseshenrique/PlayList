@@ -1,11 +1,12 @@
 package com.software.hms.playlist.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by hms on 04/03/17.
  */
-public class PlayListDto {
+public class PlayListDto implements Serializable{
 
     private String nextPageToken;
     private List<Item> items;

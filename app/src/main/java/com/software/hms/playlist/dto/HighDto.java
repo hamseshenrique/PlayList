@@ -1,10 +1,12 @@
 package com.software.hms.playlist.dto;
 
+import java.io.Serializable;
+
 /**
  * Created by hms on 05/03/17.
  */
 
-public class HighDto {
+public class HighDto implements Serializable{
 
     private String url;
     private Integer width;

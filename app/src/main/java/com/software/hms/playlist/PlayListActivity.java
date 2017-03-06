@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.software.hms.playlist.adapters.PlayListAdapter;
@@ -20,6 +22,8 @@ public class PlayListActivity extends AppCompatActivity implements PlayListActio
 
     private PlayListPresenter playListPresenter;
     private PlayListAdapter playListAdapter;
+    private ProgressBar progressBar;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +33,10 @@ public class PlayListActivity extends AppCompatActivity implements PlayListActio
         playListPresenter = new PlayListPresenterImpl(this);
         playListPresenter.findPlayList();
 
-        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
+
+        progressBar = (ProgressBar) findViewById(R.id.progress);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -42,5 +48,7 @@ public class PlayListActivity extends AppCompatActivity implements PlayListActio
     public void atualizar(final List<Item> items) {
         playListAdapter.add(items);
         playListAdapter.notifyDataSetChanged();
+        progressBar.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
     }
 }

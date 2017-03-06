@@ -1,9 +1,11 @@
 package com.software.hms.playlist.dto;
 
+import java.io.Serializable;
+
 /**
  * Created by hms on 04/03/17.
  */
-public class MediumDto {
+public class MediumDto implements Serializable{
 
     private String url;
     private Integer width;

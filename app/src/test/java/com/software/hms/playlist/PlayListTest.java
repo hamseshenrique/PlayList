@@ -68,7 +68,6 @@ public class PlayListTest {
             }
         });
 
-        // Override RxAndroid schedulers
         final RxAndroidPlugins rxAndroidPlugins = RxAndroidPlugins.getInstance();
         rxAndroidPlugins.registerSchedulersHook(new RxAndroidSchedulersHook() {
             @Override
@@ -99,6 +98,23 @@ public class PlayListTest {
         playListPresenter.findPlayList();
 
         verify(playListActivity,times(1)).atualizar(playListDto.getItems());
+    }
+
+    @Test
+    public void findByIdPlayList() throws Exception {
+        final PlayListDto playListDto = new PlayListDto();
+        playListDto.setItems(new ArrayList<Item>());
+
+        when(playListService.create()).thenReturn(googleApi);
+        when(googleApi.playlistItems(GoogleApiEnum.PART.getValue(),
+                "id",GoogleApiEnum.KEY.getValue()))
+                .thenReturn(Observable.just(playListDto));
+        playListPresenter.findByIdPlayList("id");
+
+        verify(playListActivity,times(1)).atualizar(playListDto.getItems());
 
     }
+
+
+
 }

@@ -1,9 +1,11 @@
 package com.software.hms.playlist.dto;
 
+import java.io.Serializable;
+
 /**
  * Created by hms on 04/03/17.
  */
-public class LocalizedDto {
+public class LocalizedDto implements Serializable{
 
     private String title;
     private String description;

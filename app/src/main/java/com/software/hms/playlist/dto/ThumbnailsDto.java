@@ -1,10 +1,12 @@
 package com.software.hms.playlist.dto;
 
+import java.io.Serializable;
+
 /**
  * Created by hms on 04/03/17.
  */
 
-public class ThumbnailsDto {
+public class ThumbnailsDto implements Serializable{
 
     private MediumDto medium;
     private HighDto high;
